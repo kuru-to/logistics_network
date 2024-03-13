@@ -4,8 +4,7 @@ import os
 import configparser
 
 default_section = "DEFAULT"
-# いろいろな config ファイルがどこにあるかを記載した config ファイル
-filename_config_path_and_name = "config/config_path_and_name.ini"
+test_section = "TEST"
 
 
 def config_set() -> configparser.ConfigParser:
@@ -30,7 +29,7 @@ def read_config_from_config_parser(
 
 
 def read_config(
-    file_name: str = filename_config_path_and_name,
+    file_name: str = "config/config_path_and_name.ini",
     section: str = default_section
 ) -> configparser.SectionProxy:
     """`config.ini` から設定を読み込む

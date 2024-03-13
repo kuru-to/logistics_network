@@ -10,6 +10,7 @@ readme = "README.md"
 python = "^3.8"
 julia = "^0.6.2"
 pydantic = "^2.6.4"
+pytest-cov = "^4.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
