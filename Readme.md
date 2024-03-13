@@ -11,9 +11,12 @@ poetry run python -m src
 
 ---
 ## Set up
-`poetry` を使用するためインストールが必要
+### Python
+1. `poetry` を install
+2. `pyproject.toml` 中の `name` 変更
+3. プロジェクトのディレクトリ配下に仮想環境を作成するようにする
+4. パッケージインストール
 
-### パッケージインストール
 #### プロジェクトのディレクトリ配下に仮想環境を作成するようにする
 ```
 poetry config virtualenvs.in-project true
@@ -21,14 +24,31 @@ poetry config virtualenvs.in-project true
 
 プロジェクトの root 配下に `.venv` ディレクトリが作成され, 仮想環境にかかわるファイルはそこへ格納されるようになる
 
-#### 開発環境
+#### パッケージインストール
 ```
 poetry install
 ```
 
-#### 本番環境
+本番環境であれば `--no-dev` を追加
+
+### Julia
+1. `Project.toml` の `name` をレポジトリ名に一致させる
+2. UUID 再発行
+3. `src/optimizer_template.jl` をレポジトリ名に一致させる(`test/runtests.jl` の実行に必要)
+4. パッケージインストール
+
+#### UUID 再発行
+下記を実行して出てきた文字列を `Project.toml` の `uuid` に上書き
+
 ```
-poetry install --no-dev
+julia --project=. -e "using UUIDs; println(uuid4())"
+```
+
+#### パッケージインストール
+Pkg モードで以下実行
+
+```
+Pkg> instantiate
 ```
 
 ## テスト
@@ -37,7 +57,7 @@ poetry run pytest
 ```
 
 ### テストの対象関数
-`test_*.py` のファイルにある `test_*`という形式のメソッド.
+`test` ディレクトリ中の `test_*.py` のファイルにある `test_*`という形式のメソッド.
 テストを追加する際は上記の形式
 
 ### 処理の遅いテストを実行する場合
@@ -100,14 +120,7 @@ poetry add <module> {--dev}
 
 ### 現在の `pyprofect.toml` もとに更新
 ```
-poetry update --no-dev
+poetry update
 ```
 
-開発環境であれば `--no-dev` を消す
-
-### 削除
-```
-poetry env remove .venv
-```
-
-install で原因不明のエラーが起きたときとかに再セットアップするため
+本番環境であれば `--no-dev` を追加

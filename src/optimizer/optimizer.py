@@ -10,8 +10,8 @@ import dataclasses
 from abc import ABCMeta, abstractmethod
 import time
 
-from ..utils.config_util import read_config, default_section
 from ..logger.logger import get_main_logger
+from .optimization_parameters import OptimizationParameters
 
 
 # logger の設定
@@ -19,36 +19,6 @@ logger = get_main_logger()
 
 # 表示を見やすくするためのインデント
 indent = "    "
-
-
-@dataclasses.dataclass
-class OptimizationParameters:
-    """最適化の計算に使用するパラメータをまとめた class
-
-    Args:
-        NUM_THREADS: 最適化実行時のスレッド数
-        MAX_SECONDS: 最適化に使用可能な最大秒数
-    """
-    NUM_THREADS: int = 4
-    MAX_SECONDS: int = 1800
-
-    @classmethod
-    def read_from_config(
-        cls,
-        file_name: str = "config_optimizer.ini",
-        section: str = default_section
-    ) -> 'OptimizationParameters':
-        """config_optimizer ファイルから設定を読み込む
-
-        Returns:
-            OptimizationParameters: config をもとにしたクラス
-        """
-        config = read_config(file_name, section)
-
-        # cls.__annotations__ から各型を取り出し, 変換を行う
-        for arg_name, arg_expected_type in cls.__annotations__.items():
-            config[arg_name] = arg_expected_type(config[arg_name])
-        return cls(**config)
 
 
 @dataclasses.dataclass
