@@ -31,4 +31,4 @@ jobs:
         poetry config virtualenvs.create false
         poetry install --no-root
     - name: Unitest with coverage
-      run: poetry run pytest -v --cov=src/ -m 'slow or not slow'
+      run: poetry run pytest -v --cov=src/ -m 'not cplex'

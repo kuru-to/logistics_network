@@ -2,6 +2,8 @@
 import os
 import math
 
+import pytest
+
 from src.utils.config_util import read_config, test_section
 from src.optimizer.logistics_planner import LogisticsPlanner
 from src.input_data.graph import Graph
@@ -35,6 +37,7 @@ def str_opt():
     return "optimal"
 
 
+@pytest.mark.cplex
 def test_run():
     """コスト変化点が存在しない場合に最適解が出力されることを確認"""
     anOptimizer = make_Optimizer()
@@ -42,6 +45,7 @@ def test_run():
     assert str_opt() in anOptimizer.result_status
 
 
+@pytest.mark.cplex
 def test_run_with_sigularity():
     """コスト変化点が存在する場合に最適解が出力されることを確認
 
