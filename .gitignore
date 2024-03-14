@@ -107,3 +107,6 @@ nohup.out
 # class figures
 classes.png
 packages.png
+
+data/processed/*.csv
+data/result/*.csv

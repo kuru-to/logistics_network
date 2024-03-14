@@ -1,16 +1,21 @@
 [tool.poetry]
-name = "optimizer-template"
+name = "logistics-network"
 version = "0.1.0"
 description = ""
 authors = []
 license = "MIT"
 readme = "README.md"
+packages = [
+    { include = "src" }
+]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-julia = "^0.6.2"
+python = "^3.10"
 pydantic = "^2.6.4"
 pytest-cov = "^4.1.0"
+pandas = "^2.2.1"
+tqdm = "^4.66.2"
+docplex = "^2.25.236"
 
 
 [tool.poetry.group.dev.dependencies]
