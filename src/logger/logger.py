@@ -21,6 +21,9 @@ logging.config.fileConfig(
 )
 path_log = config["PATH_LOG"]
 
+# 表示を見やすくするためのインデント
+indent = "    "
+
 
 def get_main_logger():
     """`logging.conf` で設定されている MainLogger を出力
