@@ -5,7 +5,7 @@ import math
 import pytest
 
 from src.utils.config_util import read_config, test_section
-from src.optimizer.logistics_planner import LogisticsPlanner
+from src.logistics_planner.logistics_planner import LogisticsPlanner
 from src.input_data.graph import Graph
 from src.data_access.data_access import CsvHandler
 from src.logger.logger import setup_logger

@@ -1,6 +1,6 @@
 import pydantic
 
-from ..utils.config_util import read_config
+from ..utils.config_util import read_config, default_section
 
 
 @pydantic.dataclasses.dataclass
@@ -15,7 +15,7 @@ class OptimizationParameters:
     MAX_SECONDS: int
 
     @classmethod
-    def import_(cls, config_section: str) -> 'OptimizationParameters':
+    def import_(cls, config_section: str = default_section) -> 'OptimizationParameters':
         config = read_config(section=config_section)
         filename_config_opt = config.get("PATH_CONFIG") + config.get("CONFIG_OPTIMIZER")
         config_opt = read_config(filename_config_opt, section=config_section)

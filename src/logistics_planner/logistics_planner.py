@@ -3,30 +3,17 @@
 
 @author: EINOSUKEIIDA
 """
-from __future__ import annotations
-import dataclasses
-
 from docplex.mp.model import Model
 
 from ..input_data.graph import Graph
-
-
-@dataclasses.dataclass
-class OptimizeParameters:
-    """最適化の計算に使用するパラメータをまとめた class
-
-    Args:
-        max_seconds: 最適化に使用可能な最大秒数
-        logger: 最適化の進行を出力するロガー. 基本はこのスクリプトの名前を使用
-    """
-    max_seconds: int = 1800
+from ..optimizer.optimization_parameters import OptimizationParameters
 
 
 class LogisticsPlanner:
     """最適化を実行する class"""
     def __init__(
         self,
-        anOptimizeParameters=OptimizeParameters(),
+        anOptimizeParameters=OptimizationParameters.import_(),
     ):
         """初期化
 
@@ -39,7 +26,7 @@ class LogisticsPlanner:
         """
         # Setup optimization model
         self._model = Model(name="LogisticsNetworkOptimization")
-        self._model.set_time_limit(anOptimizeParameters.max_seconds)
+        self._model.set_time_limit(anOptimizeParameters.MAX_SECONDS)
 
         # Initializing cache dict
         self._cache_sum_flow_by_lane = {}
